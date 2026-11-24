@@ -14,8 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -25,29 +26,34 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.scrolless.app.designsystem.theme.socialPrimary
 import com.scrolless.app.designsystem.theme.socialOnPrimary
-import com.scrolless.app.designsystem.theme.socialSecondary
 import com.scrolless.app.designsystem.theme.socialOnSurface
-import com.scrolless.app.designsystem.theme.spacing
+import com.scrolless.app.designsystem.theme.socialPrimary
+import com.scrolless.app.designsystem.theme.socialSecondary
+import com.scrolless.app.designsystem.theme.socialSurface
 
 @Composable
 fun SocialLiteHomeScreen(modifier: Modifier = Modifier) {
     Scaffold(topBar = { TopAppBar(title = { Text("SocialLite") }) }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(
+            Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             Text("Block Reels, Shorts & Spotlight", style = MaterialTheme.typography.headlineMedium)
+            Text("Block Reels & Shorts", style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(selected = true, onClick = {}, label = { Text("Instagram") })
                 FilterChip(selected = false, onClick = {}, label = { Text("YouTube") })
             }
-            Button(onClick = {}, shape = RoundedCornerShape(12.dp), colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = socialPrimary, contentColor = socialOnPrimary)) {
-                Text("Start Blocking")
-            }
+            Button(
+                onClick = {},
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = socialPrimary, contentColor = socialOnPrimary)
+            ) { Text("Start Blocking") }
             TextButton(onClick = {}) { Text("Open Settings") }
         }
     }
@@ -55,8 +61,9 @@ fun SocialLiteHomeScreen(modifier: Modifier = Modifier) {
 
 @Composable
 fun SocialLiteOnboardingScreen1(modifier: Modifier = Modifier) {
-    Column(modifier.padding(spacing()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("How old are you?", style = MaterialTheme.typography.headlineLarge)
+    Column(modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text("How much time do you spend doomscrolling?", style = MaterialTheme.typography.headlineLarge)
+        Text("%1$d min goal", style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = {}) { Text("13+") }
             OutlinedButton(onClick = {}) { Text("16+") }
@@ -67,9 +74,9 @@ fun SocialLiteOnboardingScreen1(modifier: Modifier = Modifier) {
 
 @Composable
 fun SocialLiteOnboardingScreen2(modifier: Modifier = Modifier) {
-    Column(modifier.padding(spacing()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text("Choose your platform", style = MaterialTheme.typography.headlineLarge)
-        Row {
+    Column(modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Text("Choose which platforms are enabled", style = MaterialTheme.typography.headlineLarge)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterChip(selected = true, onClick = {}, label = { Text("Instagram") })
             FilterChip(selected = true, onClick = {}, label = { Text("YouTube") })
             FilterChip(selected = false, onClick = {}, label = { Text("TikTok") })
@@ -79,42 +86,27 @@ fun SocialLiteOnboardingScreen2(modifier: Modifier = Modifier) {
 
 @Composable
 fun SocialLiteOnboardingScreen3(modifier: Modifier = Modifier) {
-    Column(modifier.padding(spacing()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    Column(modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text("Set your daily limit", style = MaterialTheme.typography.headlineLarge)
-        OutlinedTextField(value = "30", onValueChange = {}, label = { Text("Minutes per day") })
+        Text("Minutes per day", color = socialOnSurface)
+        OutlinedTextField(value = "30", onValueChange = {}, label = { Text("30 min goal") }, trailingIcon = { Text("min goal") })
         Button(onClick = {}) { Text("Continue") }
     }
 }
 
 @Composable
 fun SocialLiteSettingsScreen(modifier: Modifier = Modifier) {
-    Scaffold(topBar = { TopAppBar(title = { Text("Settings") }) }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Instagram Reels", style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
-                Spacer(Modifier.weight(1f))
-                Switch(checked = true, onCheckedChange = {})
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("YouTube Shorts", style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
-                Spacer(Modifier.weight(1f))
-                Switch(checked = true, onCheckedChange = {})
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Facebook Reels", style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
-                Spacer(Modifier.weight(1f))
-                Switch(checked = false, onCheckedChange = {})
-            }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("Allow DMs", style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
-                Spacer(Modifier.weight(1f))
-                Switch(checked = true, onCheckedChange = {})
-            }
+    Scaffold(topBar = { TopAppBar(title = { Text("App Settings") }) }) { padding ->
+        Column(
+            Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            SettingsRow("Block Reels", true)
+            SettingsRow("Block Shorts", true)
+            SettingsRow("Block Facebook Reels", false)
+            SettingsRow("Block DMs Only", true)
             Spacer(Modifier.height(8.dp))
-            Text("Accent", style = MaterialTheme.typography.titleMedium, color = socialSecondary)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                FilterChip(selected = true, onClick = {}, label = { Text("Socialte Blue") })
-            }
+            Text("%1$s settings", style = MaterialTheme.typography.titleMedium, color = socialSecondary)
         }
     }
 }
@@ -125,9 +117,11 @@ fun SocialLiteBlockingScreen(modifier: Modifier = Modifier) {
         Column(Modifier.fillMaxSize().padding(padding), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("No short-form video feeds will open", style = MaterialTheme.typography.titleMedium)
             Text("Messages and ordinary posts remain usable.")
-            Button(onClick = {}, shape = RoundedCornerShape(12.dp), colors = androidx.compose.material3.ButtonDefaults.buttonColors(containerColor = socialPrimary, contentColor = socialOnPrimary)) {
-                Text("Start Blocking")
-            }
+            Button(
+                onClick = {},
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = socialPrimary, contentColor = socialOnPrimary)
+            ) { Text("Start Blocking") }
         }
     }
 }
@@ -139,5 +133,14 @@ fun SocialLiteHelpScreen(modifier: Modifier = Modifier) {
             Text("Tip: Enable accessibility to start blocking.")
             Text("Tip: Adjust daily limits in Settings.")
         }
+    }
+}
+
+@Composable
+private fun SettingsRow(label: String, checked: Boolean, onToggle: () -> Unit = {}) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(label, style = MaterialTheme.typography.titleLarge, color = socialOnSurface)
+        Spacer(Modifier.weight(1f))
+        Switch(checked = checked, onCheckedChange = { onToggle() })
     }
 }
