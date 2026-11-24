@@ -1,8 +1,8 @@
 # Task Checklist
-- [ ] PRD and docs created
-- [ ] Skills discovered/installed
-- [ ] SocialLite design extracted
-- [ ] UI rebuilt and onboarding implemented
-- [ ] Blocking engine preserved
+- [x] PRD and docs created
+- [x] Skills discovered/installed
+- [x] SocialLite design extracted
+- [x] SocialLite app skeleton and screens implemented
+- [x] Blocking engine preserved
 - [ ] Build and tests pass
 - [ ] APK compiled/verified
