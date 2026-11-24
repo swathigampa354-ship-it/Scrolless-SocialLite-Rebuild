@@ -18,6 +18,13 @@
 <resources>
     <color name="ic_launcher_background">#ffffff</color>
 
+    <color name="social_primary">#FF80CBC4</color>
+    <color name="social_primary_container">#FFA0E4DF</color>
+    <color name="social_on_primary">#FFFFFFFF</color>
+    <color name="social_on_primary_container">#FF00504B</color>
+    <color name="social_secondary">#FF80C3BD</color>
+    <color name="social_secondary_container">#FFB6CECC</color>
+    <color name="social_on_secondary_container">#FF29393E</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 </resources>
