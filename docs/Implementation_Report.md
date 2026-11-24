@@ -15,6 +15,6 @@
 - Phase 8 pending: remote build and APK verification.
 
 ## Remaining Work
-- GitHub Actions build run.
-- APK install/verify (Codespaces).
+- GitHub Actions build run (blocked: token lacks `actions` scope; workflow exists but not auto-run).
+- APK install/verify (blocked: Codespace lacks Android SDK/permissions).
 - Update TASK_CHECKLIST to completed.
